@@ -59,9 +59,9 @@ info = {
    'libraries' : [
      'ESP32',
      'NET',
-     'GRAPHICS',
+#     'GRAPHICS',
      'CRYPTO','SHA256','SHA512',
-     'TLS',
+#     'TLS',
 #     'TELNET',
      'FILESYSTEM',
      'BLUETOOTH',
