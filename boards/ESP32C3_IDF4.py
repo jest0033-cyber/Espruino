@@ -65,8 +65,7 @@ info = {
 #     'TELNET',
      'FILESYSTEM',
      'BLUETOOTH',
-     'NEOPIXEL',
-     'ESP-NOW'
+     'NEOPIXEL'
    ],
    'makefile' : [
      'DEFINES+=-DBLUETOOTH_NAME_PREFIX="Espruino"',
