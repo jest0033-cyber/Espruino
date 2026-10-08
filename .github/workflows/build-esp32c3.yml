@@ -1,0 +1,36 @@
+name: Build Espruino ESP32C3
+
+on:
+  workflow_dispatch: # 允許你在網頁上手動點擊按鈕觸發編譯
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Espruino
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git wget flex bison gperf python3 python3-pip cmake ninja-build ccache libffi-dev libssl-dev dfu-util
+
+      - name: Setup ESP-IDF v4.4
+        run: |
+          git clone -b release/v4.4 --recursive https://github.com/espressif/esp-idf.git ~/esp-idf
+          cd ~/esp-idf
+          ./install.sh esp32c3
+
+      - name: Compile ESP32C3 Firmware
+        run: |
+          . ~/esp-idf/export.sh
+          BOARD=ESP32C3 make
+
+      - name: Upload Binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: espruino-esp32c3-bins
+          path: |
+            *.bin
+            build/*.bin
